@@ -53,6 +53,9 @@ var myExtension = {
       }
 
       ls.setItem('essence-raml', JSON.stringify(ramlArray));
+
+      document.getElementById("my-panel").setAttribute("label", ramlArray.join(", "));
+
     }
 
     // add event lfistener for page unload
