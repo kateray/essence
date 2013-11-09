@@ -9,10 +9,19 @@ var myExtension = {
     if(appcontent){
       appcontent.addEventListener("DOMContentLoaded", myExtension.onPageLoad, true);
     }
-    var messagepane = document.getElementById("messagepane"); // mail
-    if(messagepane){
-      messagepane.addEventListener("load", function(event) { myExtension.onPageLoad(event); }, true);
+  },
+
+  detectRaml: function(document) {
+    var metas = document.getElementsByTagName('link');
+    var ramlFiles = [];
+
+    for (i=0; i<metas.length; i++) {
+      if (metas[i].getAttribute("rel") == "service") {
+        ramlFiles.push( metas[i].getAttribute("href") );
+      }
     }
+
+    return ramlFiles;
   },
 
   onPageLoad: function(aEvent) {
@@ -20,7 +29,9 @@ var myExtension = {
     // do something with the loaded page.
     // doc.location is a Location object (see below for a link).
     // You can use it to make your code executed on certain pages only.
-    window.alert('hello!');
+    var raml = [];
+    raml = myExtension.detectRaml(doc);
+    console.log(raml);
 
     // add event listener for page unload
     aEvent.originalTarget.defaultView.addEventListener("unload", function(event){ myExtension.onPageUnload(event); }, true);
