@@ -38,18 +38,23 @@ var myExtension = {
 
   onPageLoad: function(aEvent) {
     var doc = aEvent.originalTarget; // doc is document that triggered "onload" event
-    var ls = window.content.localStorage;
-    var ramlArray = JSON.parse(ls.getItem('essence-raml') || JSON.stringify([]));
     var newRaml = myExtension.detectRaml(doc);
 
-    for (i = 0; i < newRaml.length; i++) {
-      //check if localstorage already contains href
-      if (ramlArray.indexOf(newRaml[i]) == -1 ){
-        ramlArray.push( newRaml[i] );
+    if (newRaml.length > 0){
+
+      var ls = window.content.localStorage;
+      var ramlArray = JSON.parse(ls.getItem('essence-raml') || JSON.stringify([]));
+
+      for (i = 0; i < newRaml.length; i++) {
+        //check if localstorage already contains href
+        if (ramlArray.indexOf(newRaml[i]) == -1 ){
+          ramlArray.push( newRaml[i] );
+        }
       }
+
+      ls.setItem('essence-raml', JSON.stringify(ramlArray));
     }
 
-    ls.setItem('essence-raml', JSON.stringify(ramlArray));
     // add event lfistener for page unload
     aEvent.originalTarget.defaultView.addEventListener("unload", function(event){ myExtension.onPageUnload(event); }, true);
   },
