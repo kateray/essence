@@ -3,5 +3,6 @@
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
     <statusbar id="status-bar">
         <statusbarpanel id="my-panel" label="Hello, RAML!" />
+        <script src="essence.js"/>
     </statusbar>
 </overlay>
