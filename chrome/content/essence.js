@@ -27,22 +27,13 @@ var myExtension = {
   },
 
   parseRaml: function(url) {
-    console.log('helllllllo');
-    data = RAML.Parser.loadFile(url);
-    console.log(data);
-    // RAML.Parser.loadFile(url).then(function (data) {
-    //     console.log('Received data:');
-    //     console.log(data);
-    // }, function (error) {
-    //     console.log('Error parsing: ' + url);
-    // });
-    // console.log('Requesting RAML');
-    // RAML.Parser.loadFile(url).then(function (data) {
-    //     console.log('Received data:');
-    //     console.log(data);
-    // }, function (error) {
-    //     console.log('Error parsing: ' + url);
-    // });
+    console.log('Requesting RAML');
+    RAML.Parser.loadFile(url).then(function (data) {
+        console.log('Received data:');
+        console.log(data);
+    }, function (error) {
+        console.log('Error parsing: ' + url);
+    });
   },
 
   onPageLoad: function(aEvent) {
@@ -53,9 +44,9 @@ var myExtension = {
     var raml = [];
     raml = myExtension.detectRaml(doc);
     for (i = 0; i < raml.length; i++) {
-        myExtension.parseRaml(raml[i]);
+        window.content.localStorage['raml-file-' + i.toString()] = raml[i];
     }
-
+    console.log(window.content.localStorage);
     // add event lfistener for page unload
     aEvent.originalTarget.defaultView.addEventListener("unload", function(event){ myExtension.onPageUnload(event); }, true);
   },
