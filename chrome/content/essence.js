@@ -27,14 +27,17 @@ var myExtension = {
   },
 
   parseRaml: function(url) {
-    RAML.Parser.loadFile(url).then(function (data) {
-        console.log('Received data:');
-        console.log(data);
-    }, function (error) {
-        console.log('Error parsing: ' + url);
-    });
+    console.log('helllllllo');
+    data = RAML.Parser.loadFile(url);
+    console.log(data);
+    // RAML.Parser.loadFile(url).then(function (data) {
+    //     console.log('Received data:');
+    //     console.log(data);
+    // }, function (error) {
+    //     console.log('Error parsing: ' + url);
+    // });
   },
-  
+
   onPageLoad: function(aEvent) {
     var doc = aEvent.originalTarget; // doc is document that triggered "onload" event
     // do something with the loaded page.
