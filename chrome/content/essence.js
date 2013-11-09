@@ -36,6 +36,13 @@ var myExtension = {
     // }, function (error) {
     //     console.log('Error parsing: ' + url);
     // });
+    // console.log('Requesting RAML');
+    // RAML.Parser.loadFile(url).then(function (data) {
+    //     console.log('Received data:');
+    //     console.log(data);
+    // }, function (error) {
+    //     console.log('Error parsing: ' + url);
+    // });
   },
 
   onPageLoad: function(aEvent) {
@@ -44,9 +51,7 @@ var myExtension = {
     // doc.location is a Location object (see below for a link).
     // You can use it to make your code executed on certain pages only.
     var raml = [];
-    console.log(doc.documentElement.outerHTML);
     raml = myExtension.detectRaml(doc);
-    console.log(raml);
     for (i = 0; i < raml.length; i++) {
         myExtension.parseRaml(raml[i]);
     }
