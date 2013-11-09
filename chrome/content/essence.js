@@ -26,6 +26,15 @@ var myExtension = {
     return ramlFiles;
   },
 
+  parseRaml: function(url) {
+    RAML.Parser.loadFile(url).then(function (data) {
+        console.log('Received data:');
+        console.log(data);
+    }, function (error) {
+        console.log('Error parsing: ' + url);
+    });
+  },
+  
   onPageLoad: function(aEvent) {
     var doc = aEvent.originalTarget; // doc is document that triggered "onload" event
     // do something with the loaded page.
@@ -35,6 +44,9 @@ var myExtension = {
     console.log(doc.documentElement.outerHTML);
     raml = myExtension.detectRaml(doc);
     console.log(raml);
+    for (i = 0; i < raml.length; i++) {
+        myExtension.parseRaml(raml[i]);
+    }
 
     // add event lfistener for page unload
     aEvent.originalTarget.defaultView.addEventListener("unload", function(event){ myExtension.onPageUnload(event); }, true);
