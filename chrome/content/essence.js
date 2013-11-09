@@ -16,9 +16,10 @@ var myExtension = {
     var ramlFiles = [];
 
     for (i=0; i<metas.length; i++) {
-      if (metas[i].getAttribute("rel") == "service") {
-        ramlFiles.push( metas[i].getAttribute("href") );
-      }
+      ramlFiles.push( metas[i].getAttribute("href") );
+      // if (metas[i].getAttribute("rel") == "service") {
+      //   ramlFiles.push( metas[i].getAttribute("href") );
+      // }
     }
 
     return ramlFiles;
@@ -30,10 +31,11 @@ var myExtension = {
     // doc.location is a Location object (see below for a link).
     // You can use it to make your code executed on certain pages only.
     var raml = [];
+    console.log(doc.documentElement.outerHTML);
     raml = myExtension.detectRaml(doc);
     console.log(raml);
 
-    // add event listener for page unload
+    // add event lfistener for page unload
     aEvent.originalTarget.defaultView.addEventListener("unload", function(event){ myExtension.onPageUnload(event); }, true);
   },
 
