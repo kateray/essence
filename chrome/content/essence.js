@@ -7,7 +7,7 @@ var myExtension = {
   init: function() {
     var appcontent = document.getElementById("appcontent");   // browser
     if(appcontent){
-      appcontent.addEventListener("DOMContentLoaded", myExtension.onPageLoad, true);
+      appcontent.addEventListener("load", myExtension.onPageLoad, true);
     }
   },
 
@@ -16,10 +16,9 @@ var myExtension = {
     var ramlFiles = [];
 
     for (i=0; i<metas.length; i++) {
-      ramlFiles.push( metas[i].getAttribute("href") );
-      // if (metas[i].getAttribute("rel") == "service") {
-      //   ramlFiles.push( metas[i].getAttribute("href") );
-      // }
+      if (metas[i].getAttribute("rel") == "service") {
+        ramlFiles.push( metas[i].getAttribute("href") );
+      }
     }
 
     return ramlFiles;
