@@ -1,3 +1,4 @@
+// Initialize the extension on browser load
 window.addEventListener("load", function load(event){
     window.removeEventListener("load", load, false); //remove listener, no longer needed
     myExtension.init();
@@ -11,6 +12,7 @@ var myExtension = {
     }
   },
 
+  // Return an array of RAML urls found in a document
   detectRaml: function(document) {
     var metas = document.getElementsByTagName('link');
     var ramlFiles = [];
